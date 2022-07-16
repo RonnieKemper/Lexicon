@@ -3,28 +3,20 @@
 http://ec2-3-88-235-136.compute-1.amazonaws.com/portfolio/index.html
 https://www.linkedin.com/in/ronald-kemper-9882b0220/
 
-
-
+table of contents for use with CTRL+F:
 API reference (, = or)
 
 files/ express/ config.json, app.js, routes/users.js, routes/index, services/passport.js, services/auth.js
-
 files/ angular/
-
 files/ react/
-
 files/flexbox /html/, css #bootstrap > flexbox
-
 mobile-development/ cordova, ionic
-
 files/bootstrap/html/ head, changingthemes, changing-theme-colors, breakpoints, 
 mediaQueries, sizingToContent, self-allignment, vertical-allignment, horizontal-allignment,
 gridsystem, buttons, grouping, grouping-form-controls, inputgroups, offsetColumns
-
 commands/ express, CMD, BASH, python, github
-keybinds/
+keybinds/ windows, vscode, browser
 languages/ javascript/ ajax, jquery, /python/, /SQL/, /HTML/, /CSS/
-
 tools/ QRgen, colorWheel, regexGen, languageDetection
 
 ###node node.js 
@@ -636,14 +628,14 @@ npm install -g sequelize-auto@0.4.29
 npm install -g mysql
 npm install -g sequelize-auto-migrations
 
-sequelize init
-makemigration --name initial_migration
 
+commands/express/sequelize #sequalize is ORM for db modeling
 sequelize init
-sequelize-auto -h localhost -d pluggedin -u root -x Password1! -o "./models" -t category
-sequelize model:generate --name users --attributes UserId:integer,FirstName:string,LastName:string,Email:string,Username:string,Password:string,Admin:boolean
 makemigration --name initial_migration
-makemigration --name pluggedin
+sequelize-auto -h localhost -d portfolio -u root -x Password1! -o "./models" -t category
+sequelize model:generate --name users --attributes Id:integer,FirstName:string,LastName:string,Email:string,Username:string,Password:string,Admin:boolean --force
+makemigration --name initial_migration 
+makemigration --name portfolio
 sequelize db:migrate
 
 nodemon #run express app #start express app
@@ -1007,13 +999,7 @@ languages/HTML/base
   </html
 
 
-###SQL #MYSQL #database #language #structured query languages/sql
-
-languages/sql/createdb #create new database sql server
-CREATE DATABASE IF NOT EXISTS Clearwater; #create database table
-
-
-
+files/express/config.json
 { 
   "development": {
     "username": "root",
@@ -1037,11 +1023,14 @@ CREATE DATABASE IF NOT EXISTS Clearwater; #create database table
     "dialect": "mysql"
   }
 }
-CREATE DATABASE IF NOT EXISTS pluggedin;
-USE pluggedin;
+
+###SQL #MYSQL #database #language #structured query languages/sql
+languages/sql/createdb #create new database sql server
+CREATE DATABASE IF NOT EXISTS portfolio;
+USE portfolio;
 
 CREATE TABLE IF NOT EXISTS `users` (
-	`UserId` int(11) NOT NULL auto_increment primary key,   
+	`Id` int(11) NOT NULL auto_increment primary key,   
 	`FirstName` varchar(250) NOT NULL default '', 
 	`LastName` varchar(250)  NOT NULL default '',     
 	`Username`  varchar(250)  NOT NULL UNIQUE,     
@@ -1051,8 +1040,23 @@ CREATE TABLE IF NOT EXISTS `users` (
 	`Admin` boolean not null default 0,    
 	`createdAt` DATE NOT NULL,
 	`updatedAt` DATE NOT NULL
-
 ); 
+
+CREATE TABLE IF NOT EXISTS `visitors` (
+	`Id` int(11) NOT NULL auto_increment primary key,   
+	`FirstName` varchar(250) NOT NULL default '', 
+	`LastName` varchar(250)  NOT NULL default '',  
+  `public_ip` varchar(250) NOT NULL default '',    
+  `private_ip` varchar(250) NOT NULL default '',
+	`screen_resolution`  varchar(250)  NOT NULL UNIQUE, 
+	`Email`  varchar(250)  NOT NULL UNIQUE,
+  `phonenumber` varchar(250) NOT NULL UNIQUE,
+	`Admin` boolean not null default 0,    
+	`createdAt` DATE NOT NULL,
+	`updatedAt` DATE NOT NULL
+); 
+
+
 
 CREATE TABLE IF NOT EXISTS `posts` (
 	`PostId` int(11) NOT NULL auto_increment primary key,
@@ -1095,9 +1099,9 @@ UPDATE address
 SET address2 = "Australia"
 WHERE district = "QLD"
 
-##version control system
-#github 
-commands/github:
+version control system
+github 
+commands/github/clone
 git clone 
 Create Github repo and add existing project using git bash & github CLI:
 git init -b main
@@ -1105,16 +1109,16 @@ gh repo create project-name
 git pull --set-upstream origin main
 git add . && git commit -m "initial commit" && git push
 
-add remote: 
+commands/github/remote  
 git remote add origin <https://github.com/RonnieKemper/IonicBook.git>
 git remote -v
 git push origin main
 
+commands/github/branchs
 git branch Ronnie
 git checkout Ronnie
 
-
-push to existing directory:
+commands/github/commit
 git init
 git pull #gets update from remote repo
 #git add .
@@ -1129,7 +1133,15 @@ press escape and type :wq and press enter
 
 ###languages
 ##windows #shell #cli #cmd commands/cmd
-copy /b nul filename.txt #create new file on command line
+copy /b nul filename.txt
+
+commands/cmd/killProcessRunningOnport
+netstat -ano | findstr :3306
+netstat -ano | findstr :3000
+taskkill /PID 5476 /F
+taskkill /PID 4912 /F
+net start mysql
+
 
 
 keybinds/windows
@@ -1137,6 +1149,7 @@ keybinds/windows
 win + R, cmd ctrl+shift+enter, opens cmd
 win + s, search internet/drive
 alt+t, switch tab
+crtl + f, find text on page
 ctrl + z, undo
 ctrl + a, select all
 ctrl + c, copy
@@ -1145,8 +1158,15 @@ ctrl+shift+ arrow up, highlight line behind cursor
 ctrl+shift+ arrow down, highlight line in front of cursor
 ctrl+shift+ arrow right/left, highlight line by closest Word 
 ctrl+ arrow right/left, move cursor by 1 Word 
-
 ctrl+alt+delete taskmgr
+
+
+keybinds/vscode
+ctrl+j: open commandline in vscode
+ctrl+shift+p: show all commands
+
+keybinds/browser
+ctrl+j: open js console
 
 
 
